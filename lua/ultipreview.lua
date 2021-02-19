@@ -1,7 +1,5 @@
 local M = {}
 local api = vim.api
-local opt = require 'completion.option'
-local validate = vim.validate
 
 function M.on_InsertLeave() M.insertLeave = true end
 
@@ -227,11 +225,11 @@ end
 M.on_attach = function(option)
 
     api.nvim_command(
-        'autocmd InsertEnter <buffer> lua require\'ultipreview\'.on_InsertEnter()')
+        "autocmd InsertEnter <buffer> lua require'ultipreview'.on_InsertEnter()")
     api.nvim_command(
-        'autocmd InsertLeave <buffer> lua require\'ultipreview\'.on_InsertLeave()')
+        "autocmd InsertLeave <buffer> lua require'ultipreview'.on_InsertLeave()")
     api.nvim_command(
-        'autocmd CompleteDone <buffer> lua require\'ultipreview\'.on_CompleteDone()')
+        "autocmd CompleteDone <buffer> lua require'ultipreview'.on_CompleteDone()")
 
 end
 
