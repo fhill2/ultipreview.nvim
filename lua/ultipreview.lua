@@ -1,6 +1,7 @@
 local M = {}
 local api = vim.api
-
+local config = require("ultipreview/config").get_defaults()
+local log1 = require('log1')
 function M.on_InsertLeave() M.insertLeave = true end
 
 function M.on_InsertEnter()
@@ -85,7 +86,10 @@ M.load_floating_contents = function(name)
             for i, v in ipairs(data) do
                 if i > linenr then
                     if v ~= 'endsnippet' then
+                        local v = string.gsub(v, '${%w+:([^}]+)}', '%1')
+                       local v = string.gsub(v, '%$%d+', '')
                         table.insert(snippet, v)
+
                         local linewidth = api.nvim_strwidth(v)
                         table.insert(findmaxstr, linewidth)
                     elseif v == 'endsnippet' then
@@ -140,7 +144,11 @@ M.load_floating_contents = function(name)
             end
 
             local ft = vim.api.nvim_buf_get_option(0, 'filetype')
-            M.highlighter(M.bufnr, ft)
+            log1.info('config is: ')
+        
+        
+                M.highlighter(M.bufnr, ft)
+         
         end))
 
 end
@@ -232,5 +240,40 @@ M.on_attach = function(option)
         "autocmd CompleteDone <buffer> lua require'ultipreview'.on_CompleteDone()")
 
 end
+
+
+
+local function merge_preferences(user_prefs)
+      local default_prefs = config.get_defaults()
+        
+          -- Combine user preferences with defaults preferring the user's own settings
+            if user_prefs and type(user_prefs) == "table" then
+                 current_prefs = vim.tbl_deep_extend("force", default_prefs, user_prefs)
+                   end
+                     return current_prefs
+                     end
+          
+
+function M.setup(user_prefs)
+  
+
+
+
+    local current_prefs = merge_preferences(user_prefs)
+  
+end
+ 
+
+
+
+
+
+
+
+
+
+
+
+
 
 return M
