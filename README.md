@@ -39,7 +39,7 @@ Async read file (from telescope-nvim)
 
 ## Why?
 Currently ultisnippets only returns snippet name & description for other plugin authors to implement with their plugin. 
-Because of this, the content of each snippet is read from the snippet files available in the current buffer when a Ultisnippets completion source is selected in the completion-nvim dropdown (how coc-snippets does it)
+Because of the above, this plugin reads the content for each snippet from file when a Ultisnippets completion source is selected in the completion-nvim dropdown (how coc-snippets does it)
 
 
 This plugin could work with other completion providers as it doesn't rely on completion-nvim to be installed. So far I have only tested with completion-nvim.

@@ -1,7 +1,6 @@
 local M = {}
 local api = vim.api
 local config = require("ultipreview/config").get_defaults()
-local log1 = require('log1')
 function M.on_InsertLeave() M.insertLeave = true end
 
 function M.on_InsertEnter()
@@ -144,7 +143,6 @@ M.load_floating_contents = function(name)
             end
 
             local ft = vim.api.nvim_buf_get_option(0, 'filetype')
-            log1.info('config is: ')
         
         
                 M.highlighter(M.bufnr, ft)
